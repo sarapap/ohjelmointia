@@ -18,7 +18,7 @@ xg = int(xg)
 xkg = int(kg)
 
 xg = round({massa_2} * 13.3)
-xkg = round({xg} / 1000)
+xkg = round({xg} // 1000)
 
 print(f"Massa nykymittojen mukaan: ")
 print(f"{xkg} kilogrammaa ja {xg} grammaa.")
