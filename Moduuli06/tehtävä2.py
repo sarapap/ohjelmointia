@@ -9,8 +9,8 @@ def arvo(määrä):
     number = random.randint(1, määrä)
     return number
 
-luku = int(input("Anna maksimisilmäluku: "))
+määrä = int(input("Anna maksimisilmäluku: "))
 result = 0
-while result != 6:
-    result = arvo(21)
+while result != määrä:
+    result = arvo(määrä)
     print(result)
