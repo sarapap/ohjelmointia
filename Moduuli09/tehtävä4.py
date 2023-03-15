@@ -13,6 +13,7 @@ Kilpailu jatkuu, kunnes jokin autoista on edennyt vähintään 10000 kilometriä
 Lopuksi tulostetaan kunkin auton kaikki ominaisuudet selkeäksi taulukoksi muotoiltuna.
 """
 import random
+from prettytable import PrettyTable
 class Auto:
     def __init__(self, r_tunnus, h_nopeus):
         self.r_tunnus = r_tunnus
@@ -35,25 +36,32 @@ class Auto:
     def kulje(self, tunnit):
         self.matka += self.t_nopeus * tunnit
 
-kerrat = 0
-autot = []
-while kerrat < 10:
-    numero = 1
-    huippunopeus = random.randint(100, 200)
-    auto = Auto({f"ABC-{numero}"}, huippunopeus)
-    autot.append(auto)
-    numero += 1
-    kerrat += 1
+    def tiedot(self):
+        return [self.r_tunnus, self.h_nopeus, self.t_nopeus, self.matka]
 
-for auto in autot:
-    while auto.matka <= 10000:
-        auto.kulje(1)
+autot = []
+for i in range(10):
+    huippunopeus = random.randint(100, 200)
+    rekisteritunnus = "ABC" + str(i+1)
+    auto = Auto(rekisteritunnus, huippunopeus)
+    autot.append(auto)
+
+kilpailu_jatkuu = True
+while kilpailu_jatkuu:
     for auto in autot:
         muutos = random.randint(-10, 15)
         auto.kiihdyta(muutos)
+        auto.kulje(1)
+    if auto.matka >= 10000:
+        kilpailu_jatkuu = False
+        break
+
+taulukko = PrettyTable()
+taulukko.field_names = ["Rekisteritunnus", "Huippunopeus", "Tämänhetkinen nopeus", "Kuljettu matka (km)"]
 
 for auto in autot:
-    print(auto)
+    taulukko.add_row(auto.tiedot())
 
+print(taulukko)
 
 
