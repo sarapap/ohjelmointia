@@ -7,3 +7,4 @@ Tee aliluokkiin metodi tulosta_tiedot, joka tudostaa kyseisen julkaisun kaikki t
 julkaisut Aku Ankka (päätoimittaja Aki Hyyppä) ja Hytti n:o 6 (kirjailija Rosa Liksom, 200 sivua).
 Tulosta molempien julkaisujen kaikki tiedot toteuttamiesi metodien avulla.
 """
+class Julkaisu:
