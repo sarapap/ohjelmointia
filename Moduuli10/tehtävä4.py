@@ -47,9 +47,9 @@ class Auto:
 
 
 class Kilpailu:
-    def __init__(self, nimi, maara, auto_lista):
+    def __init__(self, nimi, pituus, auto_lista):
         self.nimi = nimi
-        self.maara = maara
+        self.pituus = pituus
         self.auto_lista = auto_lista
 
     def tunti_kuluu(self):
@@ -67,7 +67,7 @@ class Kilpailu:
 
     def kilpailu_ohi(self):
         for auto in autot:
-            if auto.matka >= self.maara:
+            if auto.matka >= self.pituus:
                 return True
             else:
                 return False
@@ -81,7 +81,7 @@ for i in range(10):
     autot.append(auto)
 
 
-kilpailu = Kilpailu("Suuri Romuralli", 8000, autot)
+kilpailu = Kilpailu('Suuri Romuralli', 8000, autot)
 
 kilpailu_jatkuu = True
 
@@ -93,5 +93,5 @@ while not kilpailu.kilpailu_ohi:
         kilpailu.tulosta_tilanne()
     kierros = kierros + 1
 
-print("Kilpailu loppui.")
+print("Kilpailu päättyi.")
 kilpailu.tulosta_tilanne()
