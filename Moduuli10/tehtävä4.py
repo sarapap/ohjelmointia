@@ -18,6 +18,8 @@ tilanne-metodin avulla kymmenen tunnin välein sekä kertaalleen sen jälkeen, k
 """
 import random
 from prettytable import PrettyTable
+
+
 class Auto:
     def __init__(self, r_tunnus, h_nopeus):
         self.r_tunnus = r_tunnus
@@ -42,42 +44,54 @@ class Auto:
 
     def tiedot(self):
         return [self.r_tunnus, self.h_nopeus, self.t_nopeus, self.matka]
+
+
 class Kilpailu:
-    def __init__(self, nimi, maara, autot):
+    def __init__(self, nimi, maara, auto_lista):
         self.nimi = nimi
-        self.pituus = maara
-        self.autot = []
+        self.maara = maara
+        self.auto_lista = auto_lista
 
     def tunti_kuluu(self):
-        for auto in self.autot:
+        for auto in autot:
             muutos = random.randint(-10, 15)
             auto.kiihdyta(muutos)
             auto.kulje(1)
+
     def tulosta_tilanne(self):
         taulukko = PrettyTable()
         taulukko.field_names = ["Rekisteritunnus", "Huippunopeus", "Tämänhetkinen nopeus", "Kuljettu matka (km)"]
-        for auto in self.autot:
+        for auto in autot:
             taulukko.add_row(auto.tiedot())
         print(taulukko)
 
     def kilpailu_ohi(self):
-        kilpailu_ohi = False
-        while kilpailu_ohi:
-            if self.matka >= 10000:
-                kilpailu_ohi = True
+        for auto in autot:
+            if auto.matka >= self.maara:
+                return True
+            else:
+                return False
 
 
 autot = []
-kilpailu = Kilpailu("Suuri Romuralli", 8000, autot)
 for i in range(10):
     huippunopeus = random.randint(100, 200)
     rekisteritunnus = "ABC" + str(i+1)
     auto = Auto(rekisteritunnus, huippunopeus)
     autot.append(auto)
 
-kilpailu.tunti_kuluu()
+
+kilpailu = Kilpailu("Suuri Romuralli", 8000, autot)
+
+kilpailu_jatkuu = True
+
+kierros = 1
+while not kilpailu.kilpailu_ohi:
+    kilpailu.tunti_kuluu()
+    kilpailu.kilpailu_ohi()
+    if kierros % 10 == 0:
+        kilpailu.tulosta_tilanne()
+    kierros = kierros + 1
+
+print("Kilpailu loppui.")
 kilpailu.tulosta_tilanne()
-kilpailu.kilpailu_ohi()
-
-
-
