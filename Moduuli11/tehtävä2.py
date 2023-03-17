@@ -8,3 +8,42 @@ Kirjoita pääohjelma, jossa luot yhden sähköauton (ABC-15, 180 km/h, 52.5 kWh
 ja yhden polttomoottoriauton (ACD-123, 165 km/h, 32.3 l). Aseta kummallekin autolle haluamasi nopeus,
 käske autoja ajamaan kolmen tunnin verran ja tulosta autojen matkamittarilukemat.
 """
+class Auto:
+    def __init__(self, r_tunnus, h_nopeus):
+        self.r_tunnus = r_tunnus
+        self.h_nopeus = h_nopeus
+        self.t_nopeus = 0
+        self.matka = 0
+
+    def kiihdyta(self, muutos):
+        if muutos < 0:
+            if self.t_nopeus + muutos >= 0:
+                self.t_nopeus += muutos
+            else:
+                self.t_nopeus = 0
+        elif muutos > 0:
+            if self.t_nopeus + muutos <= self.h_nopeus:
+                self.t_nopeus += muutos
+            else:
+                self.t_nopeus = self.h_nopeus
+
+    def kulje(self, tunnit):
+        self.matka += self.t_nopeus * tunnit
+
+class Sahkoauto(Auto):
+    def __init__(self, r_tunnus, h_nopeus, kapasiteetti):
+        self.kapasiteetti = kapasiteetti
+        super().__init__(r_tunnus, h_nopeus)
+class Polttomoottoriauto(Auto):
+    def __init__(self, r_tunnus, h_nopeus, tankki):
+        self.tankki = tankki
+        super().__init__(r_tunnus, h_nopeus)
+
+s_auto = Sahkoauto("ABC-15", 180, 52.5)
+p_auto = Polttomoottoriauto("ACD-123", 165, 32.3)
+s_auto.kiihdyta(50)
+p_auto.kiihdyta(160)
+s_auto.kulje(3)
+p_auto.kulje(3)
+print(f"Sähköauton matkamittarilukemat: {s_auto.t_nopeus}, {s_auto.matka}")
+print(f"Polttomoottoriauton matkamittarilukemat: {p_auto.t_nopeus}, {s_auto.matka}")
