@@ -7,12 +7,16 @@ Tee aliluokkiin metodi tulosta_tiedot, joka tudostaa kyseisen julkaisun kaikki t
 julkaisut Aku Ankka (päätoimittaja Aki Hyyppä) ja Hytti n:o 6 (kirjailija Rosa Liksom, 200 sivua).
 Tulosta molempien julkaisujen kaikki tiedot toteuttamiesi metodien avulla.
 """
+
+
 class Julkaisu:
     def __init__(self, nimi):
         self.nimi = nimi
 
     def tulosta_tiedot(self):
         return
+
+
 class Kirja(Julkaisu):
     def __init__(self, nimi, kirjoittaja, sivumaara):
         self.kirjoittaja = kirjoittaja
@@ -22,6 +26,8 @@ class Kirja(Julkaisu):
     def tulosta_tiedot(self):
         super().tulosta_tiedot()
         print(f"Kirjan nimi on {self.nimi} ja sen kirjoittaja on {self.kirjoittaja}. Kirjassa on {self.sivumaara} sivua.")
+
+
 class Lehti(Julkaisu):
     def __init__(self, nimi, paatoimittaja):
         self.paatoimittaja = paatoimittaja
@@ -30,6 +36,7 @@ class Lehti(Julkaisu):
     def tulosta_tiedot(self):
         super().tulosta_tiedot()
         print(f"Lehden nimi on {self.nimi}, jonka päätoimittaja on {self.paatoimittaja}.")
+
 
 aku_ankka = Lehti("Aku Ankka", "Aki Hyyppä")
 hytti = Kirja("Hytti n:o 6", "Rosa Liksom", 200)

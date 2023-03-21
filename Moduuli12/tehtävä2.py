@@ -6,3 +6,11 @@ Perehdy rajapinnan dokumentaatioon riittävästi.
 Palveluun rekisteröityminen on tarpeen, jotta saat rajapintapyynnöissä tarvittavan API-avaimen (API key).
 Selvitä myös, miten saat Kelvin-asteet muunnettua Celsius-asteiksi.
 """
+import requests
+import json
+
+paikkakunta = input("Anna paikkakunta: ")
+
+# Pyynnön malli: https://api.tvmaze.com/search/shows?q=girls
+pyyntö = "https://api.tvmaze.com/search/shows?q=" + hakusana
+vastaus = requests.get(pyyntö).json()
