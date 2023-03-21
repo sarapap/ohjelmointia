@@ -12,5 +12,6 @@ import json
 paikkakunta = input("Anna paikkakunta: ")
 
 # Pyynnön malli: https://api.tvmaze.com/search/shows?q=girls
-pyyntö = "https://api.tvmaze.com/search/shows?q=" + hakusana
+pyyntö = "https://openweathermap.org/city/" + paikkakunta
 vastaus = requests.get(pyyntö).json()
+print(vastaus)

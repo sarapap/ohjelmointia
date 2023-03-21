@@ -11,3 +11,4 @@ hakusana = input("Anna hakusana: ")
 pyyntö = "https://api.chucknorris.io/jokes/search?query=" + hakusana
 vastaus = requests.get(pyyntö).json()
 print(json.dumps(vastaus, indent=2))
+
