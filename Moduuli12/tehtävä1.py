@@ -4,11 +4,7 @@ Käytä seuravalla sivulla esiteltävää rajapintaa: https://api.chucknorris.io
 Käyttäjälle on näytettävä pelkkä vitsin teksti.
 """
 import requests
-import json
 
-hakusana = input("Anna hakusana: ")
-
-pyyntö = "https://api.chucknorris.io/jokes/search?query=" + hakusana
+pyyntö = "https://api.chucknorris.io/jokes/random"
 vastaus = requests.get(pyyntö).json()
-print(json.dumps(vastaus, indent=2))
-
+print(vastaus['value'])

@@ -7,11 +7,22 @@ Palveluun rekisteröityminen on tarpeen, jotta saat rajapintapyynnöissä tarvit
 Selvitä myös, miten saat Kelvin-asteet muunnettua Celsius-asteiksi.
 """
 import requests
-import json
 
 paikkakunta = input("Anna paikkakunta: ")
 
-# Pyynnön malli: https://api.tvmaze.com/search/shows?q=girls
-pyyntö = "https://openweathermap.org/city/" + paikkakunta
-vastaus = requests.get(pyyntö).json()
-print(vastaus)
+pyyntö = "https://api.openweathermap.org/data/2.5/weather?q=" + paikkakunta + "&units=metric&lang=fi&appid=e45c83f47ddff50fc5bc40aa44d6ebe9"
+
+try:
+    vastaus = requests.get(pyyntö)
+    if vastaus.status_code == 200:
+        json_vastaus = vastaus.json()
+        tila = json_vastaus.get('weather')
+        kuvaus = tila[0]['description']
+        aste = json_vastaus.get('main')
+        asteet = aste['temp']
+        print(f"Säätila kohteessa: {kuvaus}, lämpötila {asteet}°C")
+except requests.exceptions.RequestException:
+    print("Hakua ei voitu suorittaa.")
+
+
+
