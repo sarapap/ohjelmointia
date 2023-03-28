@@ -44,5 +44,6 @@ def kenttä(koodi):
     }
     return jsonify(vastaus)
 
+
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
