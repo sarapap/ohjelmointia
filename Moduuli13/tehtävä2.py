@@ -10,35 +10,33 @@ import mysql.connector
 
 app = Flask(__name__)
 
-def connect_db():
-    return mysql.connector.connect(
-            host = '127.0.0.1',
-            port = 3306,
-            database = 'flight_game',
-            user = 'sarapython',
-            password = 'python1',
-            autocommit = True
-    )
+yhteys = mysql.connector.connect(
+        host = '127.0.0.1',
+        port = 3306,
+        database = 'flight_game',
+        user = 'sarapython',
+        password = 'python1',
+        autocommit = True
+)
 
 def asema(koodi):
-    yhteys = connect_db()
-    sql = f"SELECT ident, name, municipality FROM airport WHERE ident = '{koodi}';"
+    sql = f"SELECT ident, name, municipality FROM airport WHERE ident = '{koodi}'"
     kursori = yhteys.cursor()
     kursori.execute(sql)
     tulos = kursori.fetchall()
     yhteys.close()
     return tulos
 
-@app.route('/kenttä/<ICAO>')
+@app.route('/kenttä/<icao>')
 
-def kenttä(koodi):
-    koodi = koodi.upper()
-    tiedot = asema(koodi)
+def kenttä(icao):
+    icao = icao.upper()
+    tiedot = asema(icao)
     lista = []
     for i in tiedot:
         lista.append(i)
     vastaus = {
-        "ICAO": koodi,
+        "ICAO": icao,
         "Name": lista[1],
         "Municipality": lista[2]
     }
@@ -46,4 +44,4 @@ def kenttä(koodi):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=3000)
+    app.run(debug=True, port=3001)
