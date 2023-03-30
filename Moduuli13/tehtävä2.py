@@ -30,17 +30,18 @@ def asema(koodi):
 @app.route('/kenttä/<icao>')
 
 def kenttä(icao):
-    icao = icao.upper()
+    app.config['JSON_SORT_KEYS'] = False
     tiedot = asema(icao)
     lista = []
     for i in tiedot:
         lista.append(i)
     vastaus = {
         "ICAO": icao,
-        "Name": lista[1],
-        "Municipality": lista[2]
+        "Name": lista[0][1],
+        "Municipality": lista[0][2]
     }
     return jsonify(vastaus)
+
 
 
 if __name__ == '__main__':
